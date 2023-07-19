@@ -3,6 +3,7 @@ import pickle
 import os, sys
 import numpy as np
 from activate_function import sigmoid
+from activate_function import softmax
 
 
 def get_data():
@@ -24,7 +25,16 @@ def predict(network, x):
     a2 = np.dot(z1, W2) + b2
     z2 = sigmoid(a2)
     a3 = np.dot(z2, W3) + b3
-    z3 = sigmoid(a3)
-    a4 = np.dot(z3, W4) + b4
-    y_hat = softmax(a4)
-    return y_hat
+    y = softmax(a3)
+    return y
+
+
+x, t = get_data()
+network = ini_network()
+accuracy = 0
+
+for i in range(len(x)):
+    y = predict(network, x[i])
+    if np.argmax(y) == t[i]:
+        accuracy += 1
+print(accuracy / len(x))
