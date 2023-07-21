@@ -7,12 +7,12 @@ def function_1(x):
 
 
 def function_2(x):
-    return np.sum(x ** 2)
+    return x[0] ** 2 + x[1] ** 2
 
 
 def numerical_diff(f, x):
-    h = 1e-4
-    return (f(x + h) - f(x - h)) / (2 * h)
+    h = 1.0e-4
+    return (f(x + h) - f(x - h)) / (2.0 * h)
 
 
 def numerical_gradient(f, x):
@@ -27,7 +27,7 @@ def numerical_gradient(f, x):
         x[i] = temp - h
         diffval2 = f(x)
 
-        grad[i] = (diffval1 - diffval2) / (2 * h)
+        grad[i] = (diffval1 - diffval2) / (2.0 * h)
         x[i] = temp
     return grad
 
@@ -36,6 +36,7 @@ def slope(f, x, point):  # 生成一条f在x范围内，关于point点的切线
     k = numerical_diff(f, point)
     b = f(point) - k * point
     return k * x + b
+
 
 # show the image of function_1
 # x = np.arange(0, 20, 0.1)
@@ -48,3 +49,11 @@ def slope(f, x, point):  # 生成一条f在x范围内，关于point点的切线
 # plt.plot(x, slope(function_1, x, 10), label="slope of Function1 in 10")
 # plt.legend()
 # plt.show()
+
+# test numerical_gradient
+# res = numerical_gradient(function_2, np.array([3.0, 4.0]))
+# print(res)
+# res = numerical_gradient(function_2, np.array([0.0,2.0]))
+# print(res)
+# res = numerical_gradient(function_2, np.array([3.0, 0.0]))
+# print(res)
