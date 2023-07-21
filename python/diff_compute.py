@@ -15,9 +15,11 @@ def numerical_diff(f, x):
     return (f(x + h) - f(x - h)) / (2.0 * h)
 
 
-def numerical_gradient(f, x):
+def numerical_gradient(f, x):  # x = w
     h = 1e-4
+    x = x.flatten()
     grad = np.zeros_like(x)
+    print(x)
     for i in range(x.size):
         temp = x[i]
 
@@ -29,14 +31,13 @@ def numerical_gradient(f, x):
 
         grad[i] = (diffval1 - diffval2) / (2.0 * h)
         x[i] = temp
-    return grad
+    return grad.reshape(2, 3)
 
 
 def slope(f, x, point):  # 生成一条f在x范围内，关于point点的切线
     k = numerical_diff(f, point)
     b = f(point) - k * point
     return k * x + b
-
 
 # show the image of function_1
 # x = np.arange(0, 20, 0.1)
