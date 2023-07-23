@@ -5,7 +5,8 @@ from diff_compute import numerical_gradient
 
 
 class simple_net:
-    def __init__(self, t):
+    def __init__(self, t, lr=0.01):
+        self.lr = lr
         self.t = t
         self.W = np.random.randn(2, 3)
 

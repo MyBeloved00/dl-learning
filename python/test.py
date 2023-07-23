@@ -1,5 +1,8 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-a = np.arange(start=10, stop=20)
+x = np.arange(0, 5, 0.1)
+y = np.sin(x)
 
-print(a[[2, 3, 4]])
+plt.plot(x, y)
+plt.show()

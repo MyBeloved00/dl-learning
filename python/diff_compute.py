@@ -16,22 +16,23 @@ def numerical_diff(f, x):
 
 
 def numerical_gradient(f, x):  # x = w
+    # 这里的x就是类中的w，在python中，可修改的变量会默认为引用传递参数，所以可以直接改
     h = 1e-4
-    x = x.flatten()
+    # x = x.flatten()
     grad = np.zeros_like(x)
-    print(x)
+    #print(x.size)
     for i in range(x.size):
-        temp = x[i]
+        temp = x.flat[i]
 
-        x[i] = temp + h
+        x.flat[i] = temp + h
         diffval1 = f(x)
 
-        x[i] = temp - h
+        x.flat[i] = temp - h
         diffval2 = f(x)
 
-        grad[i] = (diffval1 - diffval2) / (2.0 * h)
-        x[i] = temp
-    return grad.reshape(2, 3)
+        grad.flat[i] = (diffval1 - diffval2) / (2.0 * h)
+        x.flat[i] = temp
+    return grad
 
 
 def slope(f, x, point):  # 生成一条f在x范围内，关于point点的切线
